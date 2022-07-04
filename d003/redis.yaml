@@ -1,0 +1,34 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: redis
+  namespace: flux   # we put HelmRelease resources into flux namespace to make use of secretRef with Git credentials
+spec:
+  releaseName: redis
+  targetNamespace: d003   # the namespace where Helm chart gets deployed
+  chart:
+    repository: https://charts.bitnami.com/bitnami
+    name: redis
+    version: 16.5.2
+  values:
+    auth:
+      enabled: true
+      existingSecret: redis-password-secret
+      existingSecretPasswordKey: password
+    sentinel:
+      enabled: true
+      livenessProbe:
+        enabled: true
+        initialDelaySeconds: 120
+      service:
+        type: LoadBalancer
+    metrics:
+      enabled: true
+---
+apiVersion: v1
+data:
+  password: aWZqd3JpMmdzZGY5ZmRzYWwxOUAl
+kind: Secret
+metadata:
+  name: redis-password-secret
+  namespace: d003

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    iam.gke.io/gcp-service-account: autoneg-system@example-dev-sbenvs.iam.gserviceaccount.com
+  name: autoneg
+  namespace: autoneg-system

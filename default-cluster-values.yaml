@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: default-cluster-values
+  namespace: flux
+data:
+  values.yaml: |
+    k8s_cluster_type: "gke"   # Supported values for cluster type: "gke" or "self-hosted"
+    environment_name: "d003"
+    region: "euwe1"
+    oidc:
+      clientId: "d003-xxx-k8s-euwe1"   # Cluster name in OAuth2 configuration
+    prometheus:
+      enabled: true   # For some test clusters we may skip setting up monitoring
+      prometheus_type: "main"   # Do not change this value
+      tainted_node_pool: false   # Set to 'false' if there is no separate node pool dedicated to monitoring
+      replicas: 1   # Change to 2 for Production environments on GKE
+      retention: "30d"
+      storage_class: "standard"   #  "standard" for GKE and "vsphere-sc-zone-f" for vSphere (zone letter to be changed according to the need)
+      storage_size: "50G"   # Approximate rough calculation: 100 pods / 10 days = 5 GB
+      load_balancer_ip: "10.201.197.40"   # use .40 of nodes IP range for GKE and .112 of MetalLB range for self-hosted
+    fluent_bit:
+      enabled: true   # Optionally, GKE-only environments may have it set to 'false' and use Stackdriver only
+      graylog_ip: "10.202.133.202"   # 10.202.16.205 for Staging and Production, Dev clusters have their separate Graylog instances
+      graylog_port: "12201"   # 12201 for Dev and Staging, 12202 for Production
+      gelf_mode: "tcp"

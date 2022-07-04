@@ -1,0 +1,29 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: example-k8s-sportsbook-contributors
+  namespace: d003
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: admin
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: k8s-sportsbook-contributors
+
+## The RoleBinding below is required to modify ServiceMonitor objects from Prometheus Operator
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: example-k8s-sportsbook-contributors-prometheus
+  namespace: d003
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus-prometheus-oper-operator
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: k8s-sportsbook-contributors
