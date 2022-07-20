@@ -1,0 +1,8 @@
+[submodule "gke"]
+	path = gke
+	url = https://github.com/crazydavidoff/gke1
+	branch = fluxv2
+[submodule "baseline"]
+	path = baseline
+	url = https://github.com/crazydavidoff/baseline
+	branch = fluxv2
