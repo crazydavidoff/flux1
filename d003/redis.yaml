@@ -27,20 +27,20 @@ spec:
         kind: HelmRepository
         name: bitnami
         namespace: flux-system
-      values:
-        auth:
-          enabled: true
-          existingSecret: redis-password-secret
-          existingSecretPasswordKey: password
-        sentinel:
-          enabled: true
-          livenessProbe:
-            enabled: true
-            initialDelaySeconds: 120
-          service:
-            type: LoadBalancer
-        metrics:
-          enabled: true
+  values:
+    auth:
+      enabled: true
+      existingSecret: redis-password-secret
+      existingSecretPasswordKey: password
+    sentinel:
+      enabled: true
+      livenessProbe:
+        enabled: true
+        initialDelaySeconds: 120
+      service:
+        type: LoadBalancer
+    metrics:
+      enabled: true
 ---
 apiVersion: v1
 data:
