@@ -28,6 +28,7 @@ spec:
         name: bitnami
         namespace: flux-system
   values:
+    nodes: 1
     auth:
       enabled: true
       existingSecret: redis-password-secret
