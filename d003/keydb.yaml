@@ -27,3 +27,5 @@ spec:
         kind: HelmRepository
         name: enapter
         namespace: flux-system
+  values:
+    nodes: 1
