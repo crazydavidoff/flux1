@@ -28,6 +28,8 @@ spec:
         name: bitnami
         namespace: flux-system
   values:
+    persistence:
+      enabled: false
     nodes: 1
     auth:
       enabled: true
